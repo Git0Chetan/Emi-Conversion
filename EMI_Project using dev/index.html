@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Loan Amortization Calculator</title>
+
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Loan Amortization Calculator</h1>
+
+        <form id="loan-form">
+
+            <div class="form-group">
+
+                <label for="amount">Loan Amount:</label>
+
+                <input type="number" id="amount" required>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="interestRate">Interest Rate (%):</label>
+
+                <input type="number" id="interestRate" step="0.01" required>
+
+            </div>
+
+            <div class="form-group">
+
+                <label for="years">Loan Term (Years):</label>
+
+                <input type="number" id="years" required>
+
+            </div>
+
+            <button type="submit">Calculate</button>
+
+        </form>
+
+        <div id="results">
+
+            <h2>Amortization Schedule</h2>
+
+            <table id="amortization-table">
+
+                <!-- Table will be populated by JavaScript -->
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
