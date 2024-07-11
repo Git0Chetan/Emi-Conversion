@@ -1,72 +1,97 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Loan Amortization Calculator</title>
-
-    <link rel="stylesheet" href="styles.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMI Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
-
 <body>
+    <div class="container">
+        <h1>EMI Conversion by Chetan Patil</h1>
+        <div class="calculator">
+            <label for="loanAmount">Loan Amount (1 to 10 digits):</label>
+            <input type="number" id="loanAmount" min="1" max="9999999999" required>
+            
+            <label for="interestRate">Interest Rate (0 to 100%):</label>
+            <input type="number" id="interestRate" step="0.01" min="0" max="100" required>
+            
+            <label for="loanTenure">Loan Tenure:</label>
+            <input type="number" id="loanTenure" min="1" required>
+            <select id="tenureType">
+                <option value="years">Years</option>
+                <option value="months">Months</option>
+            </select>
+            
+            <button onclick="calculateEMI()">Calculate EMI</button>
+            <button onclick="location.reload()">Refresh</button>
+        </div>
+        
+        <div class="result">
+            <h2>Input Details</h2>
+            <p>Loan Amount: <span id="displayLoanAmount"></span> INR</p>
+            <p>Interest Rate: <span id="displayInterestRate"></span> %</p>
+            <p>Loan Tenure: <span id="displayLoanTenure"></span> <span id="displayTenureType"></span></p>
+            
+            <h2>Amortization Schedule</h2>
+            <table id="amortizationTable">
+                <thead>
+                    <tr>
+                        <th>Instalment No.</th>
+                        <th>Outstanding Principal (INR)</th>
+                        <th>Principal (INR)</th>
+                        <th>Interest (INR)</th>
+                        <th>Instalment (INR)</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            
+            <h2>EMI Breakdown</h2>
+            <canvas id="emiChart"></canvas>
 
-    <div class="container">
+            <h2>Summary</h2>
+            <table id="summaryTable">
+                <thead>
+                    <tr>
+                        <th>Detail</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Loan Amount</td>
+                        <td id="summaryLoanAmount"></td>
+                    </tr>
+                    <tr>
+                        <td>Interest Rate</td>
+                        <td id="summaryInterestRate"></td>
+                    </tr>
+                    <tr>
+                        <td>Tenure</td>
+                        <td id="summaryTenure"></td>
+                    </tr>
+                    <tr>
+                        <td>Total Interest Paid</td>
+                        <td id="summaryTotalInterestPaid"></td>
+                    </tr>
+                    <tr>
+                        <td>Total Payment Done</td>
+                        <td id="summaryTotalPaymentDone"></td>
+                    </tr>
+                    <tr>
+                        <td>Percentage of Interest Paid</td>
+                        <td id="summaryInterestPaidPercentage"></td>
+                    </tr>
+                </tbody>
+            </table>
 
-        <h1>Loan Amortization Calculator</h1>
-
-        <form id="loan-form">
-
-            <div class="form-group">
-
-                <label for="amount">Loan Amount:</label>
-
-                <input type="number" id="amount" required>
-
-            </div>
-
-            <div class="form-group">
-
-                <label for="interestRate">Interest Rate (%):</label>
-
-                <input type="number" id="interestRate" step="0.01" required>
-
-            </div>
-
-            <div class="form-group">
-
-                <label for="years">Loan Term :</label>
-                
-
-                <input type="number" id="years" required>
-
-            </div>
-
-            <button type="submit">Calculate</button>
-
-        </form>
-
-        <div id="results">
-
-            <h2>Amortization Schedule</h2>
-
-            <table id="amortization-table">
-
-                <!-- Table will be populated by JavaScript -->
-
-            </table>
-
-        </div>
-
-    </div>
-
-    <script src="script.js"></script>
-
+            <button onclick="downloadPDF()">Download PDF</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
 </body>
-
 </html>
