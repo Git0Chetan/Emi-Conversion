@@ -7,7 +7,7 @@ document.getElementById('loan-form').addEventListener('submit', function (e) {
     const years = parseInt(document.getElementById('years').value);
  
     // Calculate values
-    const months = years * 12;
+    const months = years/12;
     const monthlyIR = interestRate / 100 / 12;
  
     // Calculate monthly payment

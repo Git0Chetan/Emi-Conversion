@@ -1,0 +1,15 @@
+Todays task is to create an Emi Calculator:
+below are the validations and features that need to added-->
+
+1. UI should be Good.
+2. Amount should not be greater than 10 digit.
+3. Amount should not be negative or zero.
+4. only number should be accepted.
+5. term should be annual as well month.
+6. Amortization table last amount should be zero.
+7. Add Pie chart.
+8. can download in pdf format .
+9. able to share through mail.
+10.interest rate percentage should be 0 to 100 %.
+11. Smooth access.
+12. One page website.
