@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>EMI Conversion by Chetan Patil</h1>
+        <h1>"EMI Conversion"</h1>
         <div class="calculator">
             <label for="loanAmount">Loan Amount (1 to 10 digits):</label>
             <input type="number" id="loanAmount" min="1" max="9999999999" required>
@@ -29,14 +29,14 @@
             <button onclick="calculateEMI()">Calculate EMI</button>
             <button onclick="location.reload()">Refresh</button>
         </div>
-        
+        <hr><hr>
         <div class="result">
-            <h2>Input Details</h2>
+            <h2>Input Details:</h2>
             <p>Loan Amount: <span id="displayLoanAmount"></span> INR</p>
             <p>Interest Rate: <span id="displayInterestRate"></span> %</p>
             <p>Loan Tenure: <span id="displayLoanTenure"></span> <span id="displayTenureType"></span></p>
-            
-            <h2>Amortization Schedule</h2>
+            <hr><hr>
+            <h2>Amortization Schedule:</h2>
             <table id="amortizationTable">
                 <thead>
                     <tr>
@@ -49,10 +49,10 @@
                 </thead>
                 <tbody></tbody>
             </table>
-            
+            <hr><hr>
             <h2>EMI Breakdown</h2>
             <canvas id="emiChart" class="small-chart"></canvas>
-
+            <hr><hr>
             <h2>Summary</h2>
             <table id="summaryTable">
                 <thead>

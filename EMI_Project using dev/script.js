@@ -97,30 +97,30 @@ function printPage() {
     window.print();
 }
 
-function downloadPDF() {
-    const { jsPDF } = window.jspdf;
-    const resultDiv = document.querySelector('.result');
-    const pdf = new jsPDF('p', 'pt', 'a4');
+// function downloadPDF() {
+//     const { jsPDF } = window.jspdf;
+//     const resultDiv = document.querySelector('.result');
+//     const pdf = new jsPDF('p', 'pt', 'a4');
 
-    html2canvas(resultDiv).then(canvas => {
-        const imgData = canvas.toDataURL('image/png');
-        const imgProps = pdf.getImageProperties(imgData);
-        const pdfWidth = pdf.internal.pageSize.getWidth();
-        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+//     html2canvas(resultDiv).then(canvas => {
+//         const imgData = canvas.toDataURL('image/png');
+//         const imgProps = pdf.getImageProperties(imgData);
+//         const pdfWidth = pdf.internal.pageSize.getWidth();
+//         const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+//         pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
         
-        // Add additional pages if content exceeds one page
-        if (pdfHeight > pdf.internal.pageSize.getHeight()) {
-            const totalPages = Math.ceil(pdfHeight / pdf.internal.pageSize.getHeight());
-            for (let i = 1; i < totalPages; i++) {
-                pdf.addPage();
-                pdf.addImage(imgData, 'PNG', 0, -pdf.internal.pageSize.getHeight() * i, pdfWidth, pdfHeight);
-            }
-        }
+//         // Add additional pages if content exceeds one page
+//         if (pdfHeight > pdf.internal.pageSize.getHeight()) {
+//             const totalPages = Math.ceil(pdfHeight / pdf.internal.pageSize.getHeight());
+//             for (let i = 1; i < totalPages; i++) {
+//                 pdf.addPage();
+//                 pdf.addImage(imgData, 'PNG', 0, -pdf.internal.pageSize.getHeight() * i, pdfWidth, pdfHeight);
+//             }
+//         }
         
-        pdf.save('emi-calculator.pdf');
-    });
-}
+//         pdf.save('emi-calculator.pdf');
+//     });
+// }
 
 function shareEmail() {
     const loanAmount = document.getElementById('loanAmount').value;
