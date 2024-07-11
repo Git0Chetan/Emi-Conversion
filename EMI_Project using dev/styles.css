@@ -67,8 +67,15 @@ th, td {
     text-align: center;
 }
 
-canvas {
-    max-width: 80%;
+canvas.small-chart {
+    max-width: 50%;
     margin: 0 auto;
-    display: block;
+}
+
+#summaryTable {
+    margin-top: 20px;
+}
+
+button {
+    margin-right: 5px;
 }

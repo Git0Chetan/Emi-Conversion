@@ -51,45 +51,35 @@
             </table>
             
             <h2>EMI Breakdown</h2>
-            <canvas id="emiChart"></canvas>
+            <canvas id="emiChart" class="small-chart"></canvas>
 
             <h2>Summary</h2>
             <table id="summaryTable">
                 <thead>
                     <tr>
-                        <th>Detail</th>
-                        <th>Amount</th>
+                        <th>Loan Amount (INR)</th>
+                        <th>Interest Rate (%)</th>
+                        <th>Tenure (Months)</th>
+                        <th>Total Interest Paid (INR)</th>
+                        <th>Total Payment Done (INR)</th>
+                        <th>Percentage of Interest Paid (%)</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Loan Amount</td>
                         <td id="summaryLoanAmount"></td>
-                    </tr>
-                    <tr>
-                        <td>Interest Rate</td>
                         <td id="summaryInterestRate"></td>
-                    </tr>
-                    <tr>
-                        <td>Tenure</td>
-                        <td id="summaryTenure"></td>
-                    </tr>
-                    <tr>
-                        <td>Total Interest Paid</td>
-                        <td id="summaryTotalInterestPaid"></td>
-                    </tr>
-                    <tr>
-                        <td>Total Payment Done</td>
-                        <td id="summaryTotalPaymentDone"></td>
-                    </tr>
-                    <tr>
-                        <td>Percentage of Interest Paid</td>
-                        <td id="summaryInterestPaidPercentage"></td>
+                        <td id="summaryLoanTenure"></td>
+                        <td id="summaryTotalInterest"></td>
+                        <td id="summaryTotalPayment"></td>
+                        <td id="summaryInterestPercentage"></td>
                     </tr>
                 </tbody>
             </table>
 
+            <button onclick="printPage()">Print</button>
             <button onclick="downloadPDF()">Download PDF</button>
+            <button onclick="shareEmail()">Share via Email</button>
         </div>
     </div>
     <script src="script.js"></script>

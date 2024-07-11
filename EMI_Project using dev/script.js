@@ -50,11 +50,19 @@ function calculateEMI() {
     }
 
     const totalPayment = totalPrincipal + totalInterest;
+    const interestPercentage = (totalInterest / loanAmount) * 100;
 
     document.getElementById('displayLoanAmount').innerText = loanAmount.toFixed(2);
     document.getElementById('displayInterestRate').innerText = interestRate.toFixed(2);
     document.getElementById('displayLoanTenure').innerText = loanTenure;
     document.getElementById('displayTenureType').innerText = tenureType === 'years' ? 'Years' : 'Months';
+
+    document.getElementById('summaryLoanAmount').innerText = loanAmount.toFixed(2);
+    document.getElementById('summaryInterestRate').innerText = interestRate.toFixed(2);
+    document.getElementById('summaryLoanTenure').innerText = loanTenureInMonths;
+    document.getElementById('summaryTotalInterest').innerText = totalInterest.toFixed(2);
+    document.getElementById('summaryTotalPayment').innerText = totalPayment.toFixed(2);
+    document.getElementById('summaryInterestPercentage').innerText = interestPercentage.toFixed(2);
 
     document.querySelector('.result').style.display = 'block';
     document.querySelector('#amortizationTable tbody').innerHTML = amortizationTable;
@@ -83,32 +91,10 @@ function calculateEMI() {
             }
         }
     });
+}
 
-    const summaryCtx = document.getElementById('summaryChart').getContext('2d');
-    new Chart(summaryCtx, {
-        type: 'bar',
-        data: {
-            labels: ['Total Loan Amount', 'Interest Paid', 'Total Payment'],
-            datasets: [{
-                label: 'Summary',
-                data: [loanAmount, totalInterest, totalPayment],
-                backgroundColor: ['#007bff', '#dc3545', '#28a745'],
-                hoverBackgroundColor: ['#0056b3', '#c82333', '#218838']
-            }]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    display: false,
-                },
-                title: {
-                    display: true,
-                    text: 'Loan Summary'
-                }
-            }
-        }
-    });
+function printPage() {
+    window.print();
 }
 
 function downloadPDF() {
@@ -134,4 +120,45 @@ function downloadPDF() {
         
         pdf.save('emi-calculator.pdf');
     });
+}
+
+function shareEmail() {
+    const loanAmount = document.getElementById('loanAmount').value;
+    const interestRate = document.getElementById('interestRate').value;
+    const loanTenure = document.getElementById('loanTenure').value;
+    const tenureType = document.getElementById('tenureType').value;
+    const loanTenureText = tenureType === 'years' ? `${loanTenure} Years` : `${loanTenure} Months`;
+
+    const amortizationTableRows = document.querySelectorAll('#amortizationTable tbody tr');
+    const summaryTableCells = document.querySelectorAll('#summaryTable tbody tr td');
+
+    let amortizationTableText = 'Instalment No.\tOutstanding Principal (INR)\tPrincipal (INR)\tInterest (INR)\tInstalment (INR)\n';
+    amortizationTableRows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        amortizationTableText += `${cells[0].innerText}\t${cells[1].innerText}\t${cells[2].innerText}\t${cells[3].innerText}\t${cells[4].innerText}\n`;
+    });
+
+    let summaryTableText = `
+Loan Amount (INR): ${summaryTableCells[0].innerText}
+Interest Rate (%): ${summaryTableCells[1].innerText}
+Tenure (Months): ${summaryTableCells[2].innerText}
+Total Interest Paid (INR): ${summaryTableCells[3].innerText}
+Total Payment Done (INR): ${summaryTableCells[4].innerText}
+Percentage of Interest Paid (%): ${summaryTableCells[5].innerText}
+    `;
+
+    const subject = 'EMI Calculator Details';
+    const body = `
+Loan Amount: ${loanAmount} INR
+Interest Rate: ${interestRate}%
+Loan Tenure: ${loanTenureText}
+
+Amortization Schedule:
+${amortizationTableText}
+
+Summary:
+${summaryTableText}
+    `;
+
+    window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
