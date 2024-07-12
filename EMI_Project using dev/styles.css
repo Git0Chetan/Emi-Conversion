@@ -1,7 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background: rgb(131,58,180);
-    background: radial-gradient(circle, rgba(131,58,180,1) 15%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+    background-color: azure;
     margin: 0;
     padding: 0;
     display: flex;
@@ -43,14 +42,14 @@ input, select, button {
 }
 
 button {
-    background-color: #28a745;
+    background-color:#560a41;
     color: white;
     border: none;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #218838;
+    background-color: #3e0f49;
 }
 
 .result {

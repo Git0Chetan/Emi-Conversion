@@ -22,8 +22,17 @@ function calculateEMI() {
 
     const loanTenureInMonths = tenureType === 'years' ? loanTenure * 12 : loanTenure;
 
-    const monthlyInterestRate = interestRate / (12 * 100);
-    const emi = loanAmount * monthlyInterestRate * (Math.pow(1 + monthlyInterestRate, loanTenureInMonths)) / (Math.pow(1 + monthlyInterestRate, loanTenureInMonths) - 1);
+    let monthlyInterestRate;
+    let emi=0;
+
+    if(interestRate!=0){
+        monthlyInterestRate = interestRate / (12 * 100);
+        emi = loanAmount * monthlyInterestRate * (Math.pow(1 + monthlyInterestRate, loanTenureInMonths)) / (Math.pow(1 + monthlyInterestRate, loanTenureInMonths) - 1);
+    }
+    else{
+        monthlyInterestRate = interestRate;
+        emi = loanAmount/loanTenureInMonths;
+    }
 
     let outstandingPrincipal = loanAmount;
     let amortizationTable = '';
@@ -162,3 +171,7 @@ ${summaryTableText}
 
     window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
+
+
+
+
